@@ -1,32 +1,116 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Notify VanillaJS Demo</title>
     <link rel="stylesheet" href="notify.css">
+    <style>
+        /* Zusätzliche Stile für die Demo-Buttons */
+        .demo-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        .demo-button {
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            color: white;
+            transition: background-color 0.2s;
+        }
+        .demo-button.success { background-color: #28a745; }
+        .demo-button.success:hover { background-color: #218838; }
+        .demo-button.error { background-color: #dc3545; }
+        .demo-button.error:hover { background-color: #c82333; }
+        .demo-button.info { background-color: #17a2b8; }
+        .demo-button.info:hover { background-color: #138496; }
+        .demo-button.warning { background-color: #ffc107; }
+        .demo-button.warning:hover { background-color: #e0a800; }
+        .demo-button.custom { background-color: #6f42c1; }
+        .demo-button.custom:hover { background-color: #5a32a3; }
+    </style>
 </head>
-
 <body>
+    <div class="demo-container">
+        <h1>Notify VanillaJS Demo</h1>
+        <button class="demo-button success" onclick="showSuccess()">Show Success</button>
+        <button class="demo-button error" onclick="showError()">Show Error</button>
+        <button class="demo-button info" onclick="showInfo()">Show Info</button>
+        <button class="demo-button warning" onclick="showWarning()">Show Warning</button>
+        <button class="demo-button custom" onclick="showCustom()">Show Custom</button>
+    </div>
 
     <script src="notify.js"></script>
     <script>
-       const _notify =  notify({ 
-            type: "success", 
-            title: "server", 
-            message: "ssb", 
-            autoHide: false, 
-            icon: '<img src="./success.gif"/>', 
-            closeBtn: true,
-            onShow: () => { 
-                console.log("isShow");
-            }, 
-            onClick: () => { 
-                console.log("isClick");
-            } 
-        })
+        function showSuccess() {
+            notify({
+                type: "success",
+                title: "Success",
+                message: "Operation completed successfully!",
+                autoHide: true,
+                hideAfter: 3000,
+                icon: '<img src="./success.gif"/>',
+                closeBtn: true,
+                onShow: () => console.log("Success shown"),
+                onClick: () => console.log("Success clicked")
+            });
+        }
+
+        function showError() {
+            notify({
+                type: "error",
+                title: "Error",
+                message: "Something went wrong!",
+                autoHide: true,
+                hideAfter: 5000,
+                closeBtn: true,
+                onShow: () => console.log("Error shown"),
+                onClick: () => console.log("Error clicked")
+            });
+        }
+
+        function showInfo() {
+            notify({
+                type: "info",
+                title: "Info",
+                message: "Here is some information for you.",
+                autoHide: false,
+                closeBtn: true,
+                onShow: () => console.log("Info shown"),
+                onClick: () => console.log("Info clicked")
+            });
+        }
+
+        function showWarning() {
+            notify({
+                type: "warning",
+                title: "Warning",
+                message: "Please be cautious!",
+                autoHide: true,
+                hideAfter: 4000,
+                closeBtn: true,
+                onShow: () => console.log("Warning shown"),
+                onClick: () => console.log("Warning clicked")
+            });
+        }
+
+        function showCustom() {
+            notify({
+                type: "success",
+                title: "Custom Notification",
+                message: "This is a custom notification with a longer duration and no auto-hide.",
+                autoHide: false,
+                icon: '<img src="./success.gif"/>',
+                closeBtn: true,
+                onShow: () => console.log("Custom shown"),
+                onClick: () => alert("Custom notification clicked!")
+            });
+        }
     </script>
 </body>
-
 </html>
